@@ -1,17 +1,67 @@
 <!DOCTYPE html>
 <html>
-
+<head>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 <body>
-
-    <div class="resultParas">
-        <p class="guesses"></p>
-        <p class="lastResult"></p>
-        <p class="lowOrHi"></p>
-    </div>
-
-    <label for="guessField">Adivina el número: </label><input type="text" id="guessField" class="guessField">
-    <input type="submit" value="Enviar respuesta" class="guessSubmit">
-
+    <table>
+        <tbody>
+            <tr>
+                <td>Mesa 1</td>
+                <td>Mesa 2</td>
+                <td>Mesa 3</td>
+            </tr>
+            <tr>
+                <td><img src="images/mesa.jpg" onclick="Mesa(1)" id="imgMesa1"></td>
+                <td><img src="images/mesa.jpg" onclick="Mesa(2)" id="imgMesa2"></td>
+                <td><img src="images/mesa.jpg" onclick="Mesa(3)" id="imgMesa3"></td>
+            </tr>
+            <tr>
+                <td>
+                    <p id="inicioMesa1">Hora de inicio:</p>
+                    <p id="finalMesa1">Hora final:</p>
+                    <p id="total1">Total:</p>
+                </td>
+                <td>
+                    <p id="inicioMesa2">Hora de inicio:</p>
+                    <p id="finalMesa2">Hora final:</p>
+                    <p id="total2">Total:</p>
+                </td>
+                <td>
+                    <p id="inicioMesa3">Hora de inicio:</p>
+                    <p id="finalMesa3">Hora final:</p>
+                    <p id="total3">Total:</p>
+                </td>
+            </tr>
+            <tr>
+                <td>Mesa 4</td>
+                <td>Mesa 5</td>
+                <td>Mesa 6</td>
+            </tr>
+            <tr>
+                <td><img src="images/mesa.jpg" onclick="Mesa(4)" id="imgMesa4"></td>
+                <td><img src="images/mesa.jpg" onclick="Mesa(5)" id="imgMesa5"></td>
+                <td><img src="images/mesa.jpg" onclick="Mesa(6)" id="imgMesa6"></td>
+            </tr>
+            <tr>
+                <td>
+                    <p id="inicioMesa4">Hora de inicio:</p>
+                    <p id="finalMesa4">Hora final:</p>
+                    <p id="total4">Total:</p>
+                </td>
+                <td>
+                    <p id="inicioMesa5">Hora de inicio:</p>
+                    <p id="finalMesa5">Hora final:</p>
+                    <p id="total5">Total:</p>
+                </td>
+                <td>
+                    <p id="inicioMesa6">Hora de inicio:</p>
+                    <p id="finalMesa6">Hora final:</p>
+                    <p id="total6">Total:</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 <footer>
     <script src="js/script.js"></script>

@@ -1,72 +1,52 @@
-let randomNumber = Math.floor(Math.random() * 100) + 1;
+let horas = [];
+let minutos = [];
+let renta = 50;
 
-const guesses = document.querySelector('.guesses');
-const lastResult = document.querySelector('.lastResult');
-const lowOrHi = document.querySelector('.lowOrHi');
-
-const guessSubmit = document.querySelector('.guessSubmit');
-const guessField = document.querySelector('.guessField');
-
-let guessCount = 1;
-let resetButton;
-guessField.focus();
-
-function checkGuess() {
-    let userGuess = Number(guessField.value);
-    if (guessCount === 1) {
-        guesses.textContent = 'Intentos anteriores: ';
-    }
-    guesses.textContent += userGuess + ' ';
-
-    if (userGuess === randomNumber) {
-        lastResult.textContent = '¡Felicidades! ¡Lo adivinaste!';
-        lastResult.style.backgroundColor = 'green';
-        lowOrHi.textContent = '';
-        setGameOver();
-    } else if (guessCount === 10) {
-        lastResult.textContent = '!!!Fin del juego!!!';
-        setGameOver();
+function Mesa(num) {
+    var mesa = document.querySelector('#imgMesa' + num);
+    if (mesa.src.indexOf('uso.jpg') > 0) {
+        mesa.src = 'images/mesa.jpg';
+        Apagar(num);
     } else {
-        lastResult.textContent = '¡Incorrecto!';
-        lastResult.style.backgroundColor = 'red';
-        if (userGuess < randomNumber) {
-            lowOrHi.textContent = '¡El número es muy bajo!';
-        } else if (userGuess > randomNumber) {
-            lowOrHi.textContent = '¡El número es muy grande!';
+        mesa.src = 'images/mesauso.jpg';
+        Encender(num);
+    }
+}
+
+function Encender(num) {
+    var d = new Date();
+    var inicio = document.querySelector('#inicioMesa' + num);
+    inicio.innerHTML = 'Hora de inicio: ' + d.getHours() + ':' + d.getMinutes();
+
+    var final = document.querySelector('#finalMesa' + num);
+    final.innerHTML = 'Hora final: ';
+
+    var total = document.querySelector('#total' + num);
+    total.innerHTML = 'Total: ';
+
+    horas[num] = d.getHours();
+    minutos[num] = d.getMinutes();
+}
+
+function Apagar(num) {
+    var d = new Date();
+    var final = document.querySelector('#finalMesa' + num);
+    final.innerHTML = 'Hora final: ' + d.getHours() + ':' + d.getMinutes();
+}
+
+window.setInterval(function () {
+    var d = new Date();
+    var tFn = (parseInt(d.getHours()) * 60) + parseInt(d.getMinutes());
+    for (var i = 1; i <= 6; i++) {
+        var mesa = document.querySelector('#imgMesa' + i);
+        if (mesa.src.indexOf('uso.jpg') > 0) {
+            var tIn = (parseInt(horas[i]) * 60) + parseInt(minutos[i]);
+            var t = tFn - tIn;
+            var h = Math.round((t / 60) * 100) / 100;
+            var cost = Math.round((h * renta) * 100) / 100;
+
+            var total = document.querySelector('#total' + i);
+            total.innerHTML = 'Total: $' + cost;
         }
     }
-
-    guessCount++;
-    guessField.value = '';
-    guessField.focus();
-}
-guessSubmit.addEventListener('click', checkGuess);
-
-function setGameOver() {
-    guessField.disabled = true;
-    guessSubmit.disabled = true;
-    resetButton = document.createElement('button');
-    resetButton.textContent = 'Iniciar nuevo juego';
-    document.body.append(resetButton);
-    resetButton.addEventListener('click', resetGame);
-}
-
-function resetGame() {
-    guessCount = 1;
-
-    const resetParas = document.querySelectorAll('.resultParas p');
-    for (let i = 0; i < resetParas.length; i++) {
-        resetParas[i].textContent = '';
-    }
-
-    resetButton.parentNode.removeChild(resetButton);
-
-    guessField.disabled = false;
-    guessSubmit.disabled = false;
-    guessField.value = '';
-    guessField.focus();
-
-    lastResult.style.backgroundColor = 'white';
-
-    randomNumber = Math.floor(Math.random() * 100) + 1;
-}
+}, 1000);
